@@ -1,3 +1,9 @@
+export interface PrixEntry {
+  nom: string;
+  maj: string;
+  valeur: number;
+}
+
 export interface FrenchStation {
   id: string;
   cp: string;
@@ -5,11 +11,7 @@ export interface FrenchStation {
   adresse: string;
   ville: string;
   services: string[];
-  prix: {
-    nom: string;
-    maj: string;
-    valeur: number;
-  }[];
+  prix: PrixEntry[];
 }
 
 export async function fetchFrenchPrices(city: string = "Paris"): Promise<FrenchStation[]> {
@@ -19,14 +21,14 @@ export async function fetchFrenchPrices(city: string = "Paris"): Promise<FrenchS
     const res = await fetch(url);
     const data = await res.json();
     if (data.results) {
-      return data.results.map((r: any) => ({
+      return data.results.map((r: Record<string, unknown>) => ({
         id: r.id,
         cp: r.cp,
         pop: r.pop,
         adresse: r.adresse,
         ville: r.ville,
-        services: r.services ? JSON.parse(r.services.replace(/'/g, '"')) : [],
-        prix: r.prix ? JSON.parse(r.prix.replace(/'/g, '"')) : []
+        services: r.services ? JSON.parse((r.services as string).replace(/'/g, '"')) : [],
+        prix: r.prix ? JSON.parse((r.prix as string).replace(/'/g, '"')) : []
       }));
     }
     return [];
