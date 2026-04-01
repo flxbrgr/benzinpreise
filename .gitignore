@@ -1,0 +1,29 @@
+# Next.js
+node_modules/
+.next/
+out/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+ENV/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Databases/Data
+*.sqlite-journal
+*.sqlite3
+data/*.csv
+data/*.xml
+data/*.zip
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
