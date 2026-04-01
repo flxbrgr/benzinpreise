@@ -1,0 +1,6 @@
+pandas
+numpy
+yfinance
+scikit-learn
+requests
+python-dotenv
